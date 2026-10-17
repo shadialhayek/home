@@ -655,6 +655,21 @@
   .contact .social-row a:hover{background:#1668e0; border-color:#7cc8ff; color:#fff; transform:translateY(-3px);}
   @media (max-width:900px){ .contact .grid{grid-template-columns:1fr;} .contact-info{grid-template-columns:1fr;} .ci-art{order:-1; max-width:220px; margin:0 auto;} .ci-body{align-items:center; text-align:center;} .ci-tag{align-self:center;} .info-pair{justify-content:center;} }
   @media (max-width:520px){ .contact .social-row{gap:9px; justify-content:center;} .contact .social-row a{width:42px; height:42px;} }
+
+  /* ===== البث المباشر ===== */
+  @keyframes livePulse{50%{opacity:.4}}
+  .live-sec{padding:60px 0 80px}
+  .live-top{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:16px}
+  .live-badge{background:#2a3147; color:#9BA6BC; padding:6px 16px; border-radius:999px; font-weight:800; font-size:.9rem}
+  .live-badge.on{background:#e11d2e; color:#fff; animation:livePulse 1.6s infinite}
+  .live-count{background:var(--forest); color:var(--gold-light); padding:6px 16px; border-radius:999px; font-weight:700; font-size:.9rem}
+  .live-frame{aspect-ratio:16/9; width:100%; border:2px solid var(--gold); border-radius:6px; overflow:hidden; background:#000; margin-top:18px}
+  .live-frame iframe{width:100%; height:100%; border:0}
+  .live-off{color:#9BA6BC; margin:18px 0}
+  .live-nav.on{color:#ff6b6b}
+  .live-pill{position:fixed; bottom:18px; left:18px; z-index:150; background:#e11d2e; color:#fff; border:none; padding:11px 20px; border-radius:999px; font-weight:800; box-shadow:0 10px 24px -8px rgba(225,29,46,.7); animation:livePulse 1.6s infinite}
+  .live-pill[hidden]{display:none}
+  #view-live:not([hidden]) + .live-pill{display:none}
 </style>
 </head>
 <body>
@@ -959,6 +974,7 @@
       </div>
     </button>
     <nav class="links">
+      <button class="live-nav" id="liveNav" onclick="showView('live')">البث المباشر</button>
       <button onclick="showView('lessons')">شاهد حصصك</button>
       <button onclick="showView('groups')">جروبات الواتساب</button>
       <button onclick="showView('schedule')">جدول الحصص</button>
@@ -971,6 +987,7 @@
     <button class="burger" id="burgerBtn" aria-label="فتح القائمة"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
+    <button class="live-nav" id="mLiveNav" onclick="showView('live')">البث المباشر</button>
     <button onclick="showView('lessons')">شاهد حصصك</button>
     <button onclick="showView('groups')">جروبات الواتساب</button>
     <button onclick="showView('schedule')">جدول الحصص</button>
@@ -1679,6 +1696,20 @@
 </div>
 
 
+<div id="view-live" class="view" hidden>
+  <section class="live-sec"><div class="wrap">
+    <div class="live-top">
+      <span class="live-badge" id="liveBadge">○ غير مباشر</span>
+      <span class="live-count" id="liveCount" hidden>👁 <b id="liveNum">0</b> يشاهدون الآن</span>
+    </div>
+    <h2 id="liveTitle">البث المباشر</h2>
+    <div class="live-frame" id="liveFrame" hidden></div>
+    <p class="live-off" id="liveOff">لا يوجد بث مباشر حالياً. تابع جدول الحصص ليصلك موعد اللايف القادم.</p>
+    <button class="btn btn-outline" onclick="showView('schedule')">جدول الحصص</button>
+  </div></section>
+</div>
+<button class="live-pill" id="livePill" onclick="showView('live')" hidden>● مباشر الآن — شاهد</button>
+
 <div id="view-lessons" class="view" hidden>
 <section class="page-hero">
   <div class="wrap">
@@ -1718,7 +1749,48 @@
     </div>
     <div class="gen-panel" data-gen="2011" hidden>
       <button type="button" class="back-link gen-back">‹ رجوع لاختيار الجيل</button>
-      <div class="item-card-list"><p style="text-align:center;padding:40px 10px;opacity:.7;font-weight:700">المحتوى قريبًا — ترقّبوا الإضافات</p></div>
+      <div class="item-card-list">
+      <div class="item-card">
+        <div class="item-card-body">
+          <span class="item-card-badge">ملخص — 2011</span>
+          <h3>ملخص شامل الوحدة الثانية — الجزء الثالث</h3>
+          <p>فيديو على قناة يوتيوب</p>
+        </div>
+        <a href="https://youtu.be/zBwQflBLjV4?si=MnWyhGyl2OBtWFCu" target="_blank" rel="noopener" class="item-card-btn">شاهد الحصة ›</a>
+      </div>
+      <div class="item-card">
+        <div class="item-card-body">
+          <span class="item-card-badge">ملخص — 2011</span>
+          <h3>ملخص شامل الوحدة الثانية — الجزء الثاني</h3>
+          <p>فيديو على قناة يوتيوب</p>
+        </div>
+        <a href="https://youtu.be/3uk96S0WJTQ?si=ZpB-ftoTIG1HPwcO" target="_blank" rel="noopener" class="item-card-btn">شاهد الحصة ›</a>
+      </div>
+      <div class="item-card">
+        <div class="item-card-body">
+          <span class="item-card-badge">ملخص — 2011</span>
+          <h3>ملخص شامل الوحدة الثانية — الجزء الأول</h3>
+          <p>فيديو على قناة يوتيوب</p>
+        </div>
+        <a href="https://youtu.be/4WYbJC_KF1s?si=gHWpyg0fa960AfdZ" target="_blank" rel="noopener" class="item-card-btn">شاهد الحصة ›</a>
+      </div>
+      <div class="item-card">
+        <div class="item-card-body">
+          <span class="item-card-badge">ملخص — 2011</span>
+          <h3>ملخص شامل الوحدة الأولى — الجزء الثاني</h3>
+          <p>فيديو على قناة يوتيوب</p>
+        </div>
+        <a href="https://youtu.be/vcr1UmSoGTs?si=WMTC9riB96B9ATL_" target="_blank" rel="noopener" class="item-card-btn">شاهد الحصة ›</a>
+      </div>
+      <div class="item-card">
+        <div class="item-card-body">
+          <span class="item-card-badge">ملخص — 2011</span>
+          <h3>ملخص شامل الوحدة الأولى — الجزء الأول</h3>
+          <p>فيديو على قناة يوتيوب</p>
+        </div>
+        <a href="https://youtu.be/nu28uJLBN6I?si=k5Bd5KFYIllehEvy" target="_blank" rel="noopener" class="item-card-btn">شاهد الحصة ›</a>
+      </div>
+      </div>
     </div>
     <div class="gen-panel" data-gen="2010" hidden>
       <button type="button" class="back-link gen-back">‹ رجوع لاختيار الجيل</button>
@@ -3132,6 +3204,41 @@
     document.addEventListener('click', function(){ setTimeout(window.applyVisited, 0); });
     window.addEventListener('hashchange', window.applyVisited);
     window.applyVisited();
+  })();
+</script>
+<script>
+  // ===== البث المباشر (لايف فيسبوك) =====
+  // api: رابط Apps Script الخاص بالبث (انظر live-apps-script.gs) | manualUrl: للتجربة فقط
+  const LIVE_CONFIG = { api: "", manualUrl: "" };
+  (function(){
+    const sid = Math.random().toString(36).slice(2), $ = id => document.getElementById(id);
+    let current = '';
+    function render(st){
+      const on = !!(st && st.live && st.url);
+      $('liveNav').classList.toggle('on', on); $('mLiveNav').classList.toggle('on', on);
+      $('livePill').hidden = !on;
+      $('liveBadge').classList.toggle('on', on);
+      $('liveBadge').textContent = on ? '● مباشر الآن' : '○ غير مباشر';
+      $('liveOff').hidden = on; $('liveFrame').hidden = !on;
+      $('liveTitle').textContent = (st && st.title) || 'البث المباشر';
+      $('liveCount').hidden = !(on && typeof st.count === 'number');
+      if (on && typeof st.count === 'number') $('liveNum').textContent = st.count;
+      if (on && st.url !== current){
+        current = st.url;
+        $('liveFrame').innerHTML = '<iframe src="https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(st.url) + '&show_text=false&autoplay=true" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+      }
+      if (!on && current){ current = ''; $('liveFrame').innerHTML = ''; }
+    }
+    async function tick(){
+      try{
+        if (LIVE_CONFIG.api){
+          const watching = !$('view-live').hidden && !document.hidden;
+          const r = await fetch(LIVE_CONFIG.api + '?sid=' + sid + (watching ? '&watch=1' : ''));
+          render(await r.json());
+        } else render(LIVE_CONFIG.manualUrl ? { live:true, url:LIVE_CONFIG.manualUrl } : null);
+      } catch(e){ console.warn('live status error', e); }
+    }
+    tick(); setInterval(tick, 30000);
   })();
 </script>
 </body>
